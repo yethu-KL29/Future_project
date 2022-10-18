@@ -19,10 +19,14 @@ app.get("/getUsers",(req,res)=>{
       })
 })
 app.post("/createUsers",async(req,res)=>{
+    try{
      const user = req.body;
      const newUser= new usermodel(user);
      await newUser.save();
      res.json(user);
+    }catch(e){
+
+    }
 })
 
 app.listen(3001,()=>{

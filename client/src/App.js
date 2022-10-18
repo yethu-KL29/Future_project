@@ -3,42 +3,63 @@ import {useEffect, useState} from 'react';
 import Axios from "axios";
 function App() {
   const [listofusers, setlistofusers] = useState([]);
-  const [name, setname] = useState("");
-  const [age, setage] = useState(0);
-  const [userName, setuserName] = useState("");
+  const [name, setName] = useState("");
+  const [age, setAge] = useState(0);
+  const [Username, setUsername] = useState("");
    useEffect(()=>{
     Axios.get("http://localhost:3001/getUsers").then((response)=>{
       setlistofusers(response.data);
     })
+  },[]);
    const createUser=()=>{
-    Axios.post("http://localhost:3001/getUsers",{
-      name :"",
-      age:0,
-      userName:"",
+    console.log("clicked");
+    Axios.post("http://localhost:3001/createUsers",{
+      name:name ,
+      age:age,
+      Username:Username,
     }).then((response)=>{
       alert("USER CREATEd");
     })
    }
-   },[]);
+ 
   return (
     <div className="App">
       <div className="username">
         {listofusers.map((user)=>{
           return (
             <div>
-              <h1>id:{user._id}</h1>
+             
               <h1>name:{user.name}</h1>
               <h1>age:{user.age}</h1>
+              <h1>age:{user.Username}</h1>
               
             </div>
           )
         })}
       </div>
       <div>
-        <input type="text" placeholde="name"></input>
-        <input type="number" placeholde="age"></input>
-        <input type="text" placeholde="username"></input>
-        <button type='submit' onClick={createUser}></button>
+        <input
+          type="text"
+          placeholder="Name..."
+          onChange={(event) => {
+            setName(event.target.value);
+          }}
+        />
+        <input
+          type="number"
+          placeholder="Age..."
+          onChange={(event) => {
+            setAge(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="Username..."
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
+        />
+        <button onClick={createUser}> Create User </button>
       </div>
     </div>
   );
