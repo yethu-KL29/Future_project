@@ -1,0 +1,13 @@
+.App{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+}
+input{
+    height: 30px;
+}
+button{
+    height: 30px;
+}

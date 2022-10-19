@@ -5,7 +5,7 @@ function App() {
   const [listofusers, setlistofusers] = useState([]);
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
-  const [Username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
    useEffect(()=>{
     Axios.get("http://localhost:3001/getUsers").then((response)=>{
       setlistofusers(response.data);
@@ -14,11 +14,11 @@ function App() {
    const createUser=()=>{
     console.log("clicked");
     Axios.post("http://localhost:3001/createUsers",{
-      name:name ,
-      age:age,
-      Username:Username,
+      name,
+      age,
+      username,
     }).then((response)=>{
-      alert("USER CREATEd");
+      setlistofusers([...listofusers,{name,age,username}])
     })
    }
  
@@ -32,6 +32,7 @@ function App() {
               <h1>name:{user.name}</h1>
               <h1>age:{user.age}</h1>
               <h1>age:{user.Username}</h1>
+              <br/>
               
             </div>
           )
